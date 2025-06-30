@@ -7,7 +7,7 @@ const app = express();
 app.use(passport.initialize());
 
 app.get(
-  "/api/auth/callback",
+  "/api/auth-callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     res.redirect("/");
