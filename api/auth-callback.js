@@ -9,8 +9,9 @@ app.use(passport.initialize());
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
+// ⚠️ Route should be "/" because the file IS the endpoint
 app.get(
-  "/api/auth/callback",
+  "/",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     res.redirect("/");
