@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-require("../_passport"); // Note the updated path
+require("../_passport"); // adjust path for parent folder
 const serverless = require("serverless-http");
 
 const app = express();
