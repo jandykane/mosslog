@@ -9,8 +9,6 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "https://mosslog.vercel.app/api/auth/callback",
     },
-    (accessToken, refreshToken, profile, done) => {
-      return done(null, profile);
-    },
+    (accessToken, refreshToken, profile, done) => done(null, profile),
   ),
 );

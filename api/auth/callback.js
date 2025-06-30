@@ -6,8 +6,6 @@ const serverless = require("serverless-http");
 const app = express();
 
 app.use(passport.initialize());
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
 
 app.get(
   "/",
@@ -16,13 +14,11 @@ app.get(
     failureRedirect: "/?auth=fail",
   }),
   (req, res) => {
-    console.log("✅ Callback success:", req.user);
+    console.log("✅ Auth success:", req.user);
     res.redirect("/?auth=success");
   },
 );
 
-app.get("/ping", (req, res) => {
-  res.send("pong");
-});
+app.get("/ping", (req, res) => res.send("pong"));
 
 exports.default = serverless(app);
