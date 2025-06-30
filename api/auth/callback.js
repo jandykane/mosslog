@@ -5,22 +5,18 @@ const serverless = require("serverless-http");
 
 const app = express();
 
+// Minimal session-less setup
 app.use(passport.initialize());
+
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
-// ✅ This route must be "/"
 app.get(
   "/",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", { session: false, failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("/"); // Success! Redirect to homepage
   },
 );
-
-// Optional: test route
-app.get("/ping", (req, res) => {
-  res.send("pong");
-});
 
 exports.default = serverless(app);
