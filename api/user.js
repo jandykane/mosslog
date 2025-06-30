@@ -1,12 +1,13 @@
 const express = require("express");
-const passport = require("passport");
-require("./_passport");
 const serverless = require("serverless-http");
 
 const app = express();
 
-app.use(passport.initialize());
+// This is a placeholder route for now
+app.get("/", (req, res) => {
+  res.json({
+    message: "User route is active, but login session not implemented yet.",
+  });
+});
 
-app.get("/", (req, res) => res.status(401).json({ error: "Not implemented" }));
-
-exports.default = serverless(app);
+module.exports = serverless(app);

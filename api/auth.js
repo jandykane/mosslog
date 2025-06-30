@@ -15,4 +15,4 @@ app.get(
   }),
 );
 
-exports.default = serverless(app);
+module.exports = serverless(app);

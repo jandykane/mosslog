@@ -14,11 +14,12 @@ app.get(
     failureRedirect: "/?auth=fail",
   }),
   (req, res) => {
-    console.log("✅ Auth success:", req.user);
+    console.log("✅ Callback triggered:", req.user);
     res.redirect("/?auth=success");
   },
 );
 
+// Optional: test route to verify deployment
 app.get("/ping", (req, res) => res.send("pong"));
 
-exports.default = serverless(app);
+module.exports = serverless(app);
