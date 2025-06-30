@@ -5,18 +5,28 @@ const serverless = require("serverless-http");
 
 const app = express();
 
-// Minimal session-less setup
 app.use(passport.initialize());
 
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
-
+// Minimal Passport config, no session
 app.get(
   "/",
-  passport.authenticate("google", { session: false, failureRedirect: "/" }),
+  (req, res, next) => {
+    console.log("🔁 Handling Google callback...");
+    next();
+  },
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: "/?error=google_auth_failed",
+  }),
   (req, res) => {
-    res.redirect("/"); // Success! Redirect to homepage
+    console.log("✅ Google authenticated user:", req.user);
+    res.redirect("/?success=true");
   },
 );
+
+// Optional ping route
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
 
 exports.default = serverless(app);
