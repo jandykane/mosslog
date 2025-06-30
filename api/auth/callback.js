@@ -18,10 +18,9 @@ app.get(
   },
 );
 
-// Optional: ping test
+// Optional: test route
 app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-module.exports = app;
-module.exports.handler = serverless(app);
+exports.default = serverless(app);
